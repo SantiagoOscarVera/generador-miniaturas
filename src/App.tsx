@@ -10,7 +10,8 @@ import FontProperties from "./types/fonts";
 import WebFont from "webfontloader";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import Link from '@mui/material/Link';
 
 
 const App = () => {
@@ -113,19 +114,19 @@ const App = () => {
           </Grid>
       </Grid>
       <Generator ref={ref} image={image} position={position} size={size} />
-      {/* <Box p="5" mt="5" marginLeft="20%" style={{ backgroundColor: "#065fd4"}}   >
-        <Typography variant="h4" component="h1" fontWeight="semibold" mb="4" ml="15%">
-          Url de imagenes previas:
-        </Typography>
-        {downloadedImages.map(({ name, url }) => (
-          <Box key={name} align="center" >
-            <Typography variant="h4" component="h1" mr="2">{name}</Typography>
-            <Link as="a" href={url} target="_blank" rel="noopener noreferrer">
-              {url}
-            </Link>
-          </Box>
-        ))}
-      </Box> */}
+                <Box p="5" mt="5" marginLeft="20%" style={{ backgroundColor: "#065fd4"}}   >
+                  <Typography variant="h4" component="h1" fontWeight="semibold" mb="4" ml="15%">
+                    Url de imagenes previas:
+                  </Typography>
+                  {downloadedImages.map(({ name, url }) => (
+                    <Box key={name} /* align="center" */ >
+                      <Typography variant="h4" component="h1" mr="2">{name}</Typography>
+                      <Link  href={url} target="_blank" rel="noopener">
+                        {url}
+                      </Link>
+                    </Box>
+                  ))}
+                </Box>
       
     </Container>
   );
