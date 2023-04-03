@@ -53,7 +53,10 @@ const App = () => {
     const links = await Promise.all(
       images.map(async (image, index) => {
         const dataUrl = await toPng(image as HTMLElement);
-        const name = `file-${index + 1}.png`;
+        let name = "";
+        if (index === 0) name = "400x300";
+        else if (index === 1) name = "160x120";
+        else if (index === 2) name = "120x120";
         const url = URL.createObjectURL(
           await fetch(dataUrl).then((res) => res.blob())
         );
@@ -62,6 +65,7 @@ const App = () => {
     );
     setDownloadedImages(links);
   };
+  
   const handleClearImage = () => {
     setImage("");
     setDownloadedImages([]);
@@ -83,6 +87,23 @@ const App = () => {
     <Container sx={{  maxWidth: 'none !important',border: 2, position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft:-8, marginRight:-10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
     <Navbar />
       <Grid container spacing={2} justifyContent="center" marginTop={10}>
+
+      <Grid item  
+      className="vista previa"
+       minWidth={100}
+       borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
+       sx={{ border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "300px",  }}
+     >
+                    <Typography variant="h5"  mb="15%" ml="15%" fontSize={18} style={{ textDecoration: 'underline'}}>
+                      Vista previa
+                    </Typography>
+                    {downloadedImages.map(({ name, url }) => (
+  <Box key={name} >
+    <Typography variant="h6" component="h1" mr="2">{name}</Typography>
+    <Link variant="h6" href={url} target="_blank" rel="noopener" children="Ver" />
+  </Box>
+))}
+                </Grid>
       <Grid item sx={{ marginLeft:"auto"}}>
         <Box textAlign="center" >
           <Canvas
@@ -106,7 +127,7 @@ const App = () => {
           />
           </Box>
           </Grid>
-          <Grid className="grid2" item sx={{ display: 'flex', justifyContent: 'flex-end', marginLeft:"auto", marginTop:"-2.5%"}}>
+          <Grid item className="grid2" sx={{ display: 'flex', justifyContent: 'flex-end', marginLeft:"auto", marginTop:"-2.5%"}}>
             <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)">
               <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
               </Sidebar>
@@ -114,19 +135,7 @@ const App = () => {
           </Grid>
       </Grid>
       <Generator ref={ref} image={image} position={position} size={size} />
-                <Box p="5" mt="5" marginLeft="20%" style={{ backgroundColor: "#065fd4"}}   >
-                  <Typography variant="h4" component="h1" fontWeight="semibold" mb="4" ml="15%">
-                    Url de imagenes previas:
-                  </Typography>
-                  {downloadedImages.map(({ name, url }) => (
-                    <Box key={name} /* align="center" */ >
-                      <Typography variant="h4" component="h1" mr="2">{name}</Typography>
-                      <Link  href={url} target="_blank" rel="noopener">
-                        {url}
-                      </Link>
-                    </Box>
-                  ))}
-                </Box>
+      
       
     </Container>
   );
