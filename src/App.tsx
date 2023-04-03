@@ -89,21 +89,21 @@ const App = () => {
       <Grid container spacing={2} justifyContent="center" marginTop={10}>
 
       <Grid item  
-      className="vista previa"
-       minWidth={100}
-       borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
-       sx={{ border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "300px",  }}
-     >
-                    <Typography variant="h5"  mb="15%" ml="15%" fontSize={18} style={{ textDecoration: 'underline'}}>
-                      Vista previa
-                    </Typography>
-                    {downloadedImages.map(({ name, url }) => (
-  <Box key={name} >
-    <Typography variant="h6" component="h1" mr="2">{name}</Typography>
-    <Link variant="h6" href={url} target="_blank" rel="noopener" children="Ver" />
-  </Box>
-))}
-                </Grid>
+        className="vista previa"
+        minWidth={100}
+        borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
+        sx={{ border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:"6%" }}
+        >
+        <Typography variant="h6"  mb="15%"  fontSize={18} style={{ textDecoration: 'underline', marginLeft:"-6%"}}>
+            Vista previa
+        </Typography>
+            {downloadedImages.map(({ name, url }) => (
+            <Box key={name} >
+              <Typography variant="h5" component="h1" mr="2" fontSize={16}>{name}</Typography>
+              <Link variant="h6" href={url} target="_blank" rel="noopener" fontSize={15} children="Ver" />
+            </Box>
+          ))}
+      </Grid>
       <Grid item sx={{ marginLeft:"auto"}}>
         <Box textAlign="center" >
           <Canvas
