@@ -43,11 +43,48 @@ const App = () => {
   
     for (const image of images) {
       const dataUrl = await toPng(image as HTMLElement);
-      const name = `file-${index}.png`;
-      download(dataUrl, name);
-      index += 1;
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+  
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0);
+  
+        const newCanvas = document.createElement("canvas");
+        if (index === 1) {
+          newCanvas.width = 400;
+          newCanvas.height = 300;
+        } else if (index === 2) {
+          newCanvas.width = 160;
+          newCanvas.height = 120;
+        } else if (index === 3) {
+          newCanvas.width = 120;
+          newCanvas.height = 120;
+        }
+        const newCtx = newCanvas.getContext("2d");
+        newCtx?.drawImage(
+          canvas,
+          0,
+          0,
+          img.width,
+          img.height,
+          0,
+          0,
+          newCanvas.width,
+          newCanvas.height
+        );
+  
+        const newName = `file-${index}.png`;
+        const newDataUrl = newCanvas.toDataURL("image/png");
+        download(newDataUrl, newName);
+        index += 1;
+      };
+      img.src = dataUrl;
     }
   };
+  
   const handleGetLinks = async () => {
     const images = Array.from(ref.current?.childNodes ?? []);
     const links = await Promise.all(
@@ -127,7 +164,7 @@ const App = () => {
           />
           </Box>
           </Grid>
-          <Grid item className="grid2" sx={{ display: 'flex', justifyContent: 'flex-end', marginLeft:"auto", marginTop:"-2.5%"}}>
+          <Grid item className="grid2" sx={{ display: 'flex', justifyContent: 'flex-end', marginLeft:"auto",/*  marginTop:"-2%", */ marginBottom:"50%"}}>
             <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)">
               <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
               </Sidebar>
