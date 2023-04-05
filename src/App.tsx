@@ -5,7 +5,7 @@ import Canvas from "./components/canvas";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
 import Generator from "./components/generator";
-import FontSection from "./components/font-section";
+/* import FontSection from "./components/font-section"; */
 import FontProperties from "./types/fonts";
 import WebFont from "webfontloader";
 import Container from "@mui/material/Container";

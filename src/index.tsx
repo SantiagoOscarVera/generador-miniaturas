@@ -9,6 +9,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import { Auth0Provider, Auth0ProviderOptions } from "@auth0/auth0-react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router/index";
 
 interface MyAuth0ProviderOptions {
   domain: string;
@@ -25,7 +27,8 @@ const auth0Options: MyAuth0ProviderOptions = {
 ReactDOM.render(
   <ScopedCssBaseline>
     <Auth0Provider {...auth0Options}>
-      <App />
+      {/* <App /> */}
+      <RouterProvider router={router} />
     </Auth0Provider>
   </ScopedCssBaseline>,
   document.getElementById("root")

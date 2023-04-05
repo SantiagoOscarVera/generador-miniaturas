@@ -1,4 +1,4 @@
-import {
+/* import {
     Box,
     FormControl,
     FormLabel,
@@ -13,9 +13,9 @@ import {
     NumberInputStepper,
     Select,
   } from "@chakra-ui/react";
-  import Section from "./section";
+  import Section from "./section"; */
   import React, { useEffect, useState } from "react";
-  import FontProperties, {
+  /* import FontProperties, {
     FontFamily,
     FontStyle,
     FontVariant,
@@ -142,4 +142,4 @@ import {
     );
   };
   
-  export default FontSection;
+  export default FontSection; */

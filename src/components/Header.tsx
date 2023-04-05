@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
 
@@ -58,7 +59,8 @@ const Header: React.FC = () => {
             <span className={classes.colorText}> Santiago Vera,</span> Web Developer
           </h1>
           <IconButton>
-            <SortIcon className={classes.icon} />
+            
+            < HomeRoundedIcon className={classes.icon}/>
           </IconButton>
         </Toolbar>
       </AppBar>
