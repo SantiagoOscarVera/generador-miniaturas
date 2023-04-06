@@ -27,24 +27,6 @@ type SidebarProps = {
 
 const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
 
-  const ref = useRef<HTMLDivElement>(null);
-  const [downloadedImages, setDownloadedImages] = useState<{ name: string; url: string }[]>([]);
-
-  const handleGetLinks = async () => {
-    const images = Array.from(ref.current?.childNodes ?? []);
-    const links = await Promise.all(
-      images.map(async (image, index) => {
-        const dataUrl = await toPng(image as HTMLElement);
-        const name = `file-${index + 1}.png`;
-        const url = URL.createObjectURL(
-          await fetch(dataUrl).then((res) => res.blob())
-        );
-        return { name, url };
-      })
-    );
-    setDownloadedImages(links);
-  };
-
   return (
     <Box minWidth={360}sx={{ border: 1}} style={{
       display: "flex",

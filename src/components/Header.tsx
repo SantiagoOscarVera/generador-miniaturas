@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Collapse, Button } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
+import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,10 +60,11 @@ const Header: React.FC = () => {
           <h1 className={classes.appbarTitle}>
             <span className={classes.colorText}> Santiago Vera,</span> Web Developer
           </h1>
+          <Link to="/home"> 
           <IconButton>
-            
             < HomeRoundedIcon className={classes.icon}/>
           </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
 

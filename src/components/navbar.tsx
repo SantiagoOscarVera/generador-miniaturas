@@ -5,7 +5,12 @@ import { LoginButton } from "./auth0/login";
 import { LogoutButton } from "./auth0/logout";
 import  Profile  from "./auth0/profile";
 
-const Navbar = () => {
+interface NavbarProps {
+  checked: boolean;
+  onChange: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ checked, onChange }) => {
   
   const { isAuthenticated } = useAuth0();
   return (
@@ -14,7 +19,10 @@ const Navbar = () => {
         <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
         
           <Typography variant="h6" >Thumbnail Generator</Typography>
-          
+          <FormControlLabel
+            control={<Switch checked={checked} onChange={onChange} />}
+            label="Activar vista previa"
+          />
           {isAuthenticated && (
             <Box display="flex" alignItems="center">
               <Box 
