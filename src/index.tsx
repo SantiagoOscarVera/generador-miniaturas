@@ -21,7 +21,7 @@ interface MyAuth0ProviderOptions {
 const auth0Options: MyAuth0ProviderOptions = {
   domain: "dev-8eo5t7k4kwgat7pr.us.auth0.com",
   clientId: "7F2p5G1fCtITyp6vNcyGG8g34eefSU1k",
-  redirectUri: window.location.origin,
+  redirectUri: window.location.origin + "/home",
 };
 
 ReactDOM.render(

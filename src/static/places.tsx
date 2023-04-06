@@ -7,16 +7,16 @@ interface Place {
 
 const places: Place[] = [
   {
-    title: 'Green',
+    title: 'Productividad y engagement a un solo click',
     description:
-      "The Maldives are home to some of the world's most ravishing islands, but it's the sea, which truly makes these islands shine. Luminous aquamarine waters with a crystal clarity lap upon these dazzling white shores, which barely peek above the Indian Ocean.",
+      "No necesitas más herramientas pesadas para tu computadora ni pagar software costoso, ahorrate todo eso usando esta web y mejorá en un 55% tu productividad, además ¡las imagenes creadas aquí generan un mejor SEO lo que te da más engagement y likes!",
     imageUrl: process.env.PUBLIC_URL + '/assets/yt7.jpg',
     time: 1500,
   },
   {
-    title: 'Bora Bora',
+    title: '¡Imágenes miniaturas para tu canal de Youtube!',
     description:
-      'Shaped like a giant sombrero, this lush volcanic island stars in countless South Pacific fantasies. The focal point and best asset of this tropical beauty is its ravishing lagoon in technicolor turquoise. Fish, turtles, sharks, and rays swim in the clear waters.',
+      'Aumentá la calidad visual para tu audiencia generando imagenes en miniatura para tus videos y shorts.',
     imageUrl: process.env.PUBLIC_URL + '/assets/yt5.jpg',
     time: 1500,
   },
