@@ -18,6 +18,8 @@ import Paper from '@mui/material/Paper';
 import Collapse from '@mui/material/Collapse';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Theme } from '@mui/material/styles';
+import Swal from 'sweetalert2'
+
 
 
 
@@ -108,12 +110,48 @@ const App = () => {
       })
     );
     setDownloadedImages(links);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed in successfully'
+    })
   };
   
   const handleClearImage = () => {
     setImage("");
     setDownloadedImages([]);
+  
+    if (image) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Image cleared successfully'
+      })
+    }
   };
+  
 
   useEffect(() => {
     WebFont.load({
@@ -126,9 +164,29 @@ const App = () => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
-    setChecked((prev) => !prev);
+    setChecked((prev) => {
+      if (!prev) {
+        Swal.fire({
+          title: '<strong>Vista previa </strong>',
+          icon: 'info',
+          html:
+            'Cuando haya una imagen o foto en el centro, haz click en <b>"Previous image links"</b>, para que aparezcan las vistas previas.',
+          
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> Great!',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+          cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i>',
+          cancelButtonAriaLabel: 'Thumbs down'
+        });
+      }
+      return !prev;
+    });
   };
-
+  
+  
+  
   /* ------------------------------------------------------------------------------------------------------------------- */
   /* ------------------------------------------------------------------------------------------------------------------- */
 
@@ -159,6 +217,7 @@ const App = () => {
             ))}
             
         </Grid>
+        
         </Collapse>
         
       

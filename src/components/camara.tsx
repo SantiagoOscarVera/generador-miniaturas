@@ -2,6 +2,7 @@ import React, { createRef, RefObject, useState } from "react";
 import Webcam from "react-webcam";
 import Box from "@mui/material/Box";
 import { Button} from "@material-ui/core";
+import Swal from 'sweetalert2'
 
 
 interface CamaraState {
@@ -20,6 +21,22 @@ const Camara = () => {
       console.log(captura);
       setState({ imagen: captura });
       setCapturaVisible(true);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'info',
+        title: 'Arrastra la captura hasta el centro'
+      })
     }
   };
 
