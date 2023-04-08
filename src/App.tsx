@@ -5,23 +5,15 @@ import Canvas from "./components/canvas";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
 import Generator from "./components/generator";
-/* import FontSection from "./components/font-section"; */
 import FontProperties from "./types/fonts";
 import WebFont from "webfontloader";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { Grid, Typography } from "@mui/material";
 import Link from '@mui/material/Link';
-
-import Switch from '@mui/material/Switch';
-import Paper from '@mui/material/Paper';
 import Collapse from '@mui/material/Collapse';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { Theme } from '@mui/material/styles';
 import Swal from 'sweetalert2'
-
-
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
   const [image, setImage] = useState("");
@@ -37,6 +29,7 @@ const App = () => {
   });
   const [downloadedImages, setDownloadedImages] = useState<{ name: string; url: string }[]>([]);
   
+  
   const ref = useRef<HTMLDivElement>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -44,89 +37,199 @@ const App = () => {
     setImage(URL.createObjectURL(file));
   }, []);
 
+  const { isAuthenticated } = useAuth0();
+
+
   const handleDownload = async () => {
-    if (!ref.current) return;
+
+    if (!isAuthenticated) {
+      Swal.fire({
+        title: '<strong>Login</strong>',
+        icon: 'info',
+        html:
+          'Debes loguearte para poder descargar las miniaturas de forma automática.',
+        
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Great!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+      });
+      return;
+    }
   
+    if (!ref.current) {
+      console.error('El objeto ref es nulo');
+      return;
+    }
+    
     const images = Array.from(ref.current.childNodes);
+
     let index = 1;
   
-    for (const image of images) {
-      const dataUrl = await toPng(image as HTMLElement);
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
+    try {
+      for (const image of images) {
+        const dataUrl = await toPng(image as HTMLElement);
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
   
-        const ctx = canvas.getContext("2d");
-        ctx?.drawImage(img, 0, 0);
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(img, 0, 0);
   
-        const newCanvas = document.createElement("canvas");
-        if (index === 1) {
-          newCanvas.width = 400;
-          newCanvas.height = 300;
-        } else if (index === 2) {
-          newCanvas.width = 160;
-          newCanvas.height = 120;
-        } else if (index === 3) {
-          newCanvas.width = 120;
-          newCanvas.height = 120;
+          const newCanvas = document.createElement("canvas");
+          if (index === 1) {
+            newCanvas.width = 400;
+            newCanvas.height = 300;
+          } else if (index === 2) {
+            newCanvas.width = 160;
+            newCanvas.height = 120;
+          } else if (index === 3) {
+            newCanvas.width = 120;
+            newCanvas.height = 120;
+          }
+          const newCtx = newCanvas.getContext("2d");
+          newCtx?.drawImage(
+            canvas,
+            0,
+            0,
+            img.width,
+            img.height,
+            0,
+            0,
+            newCanvas.width,
+            newCanvas.height
+          );
+  
+          const newName = `file-${index}.png`;
+          const newDataUrl = newCanvas.toDataURL("image/png");
+          download(newDataUrl, newName);
+          index += 1;
+        };
+        img.src = dataUrl;
+      }
+    } catch (error) {
+      /* console.error('Ocurrió un error durante la descarga: ', error); */
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-        const newCtx = newCanvas.getContext("2d");
-        newCtx?.drawImage(
-          canvas,
-          0,
-          0,
-          img.width,
-          img.height,
-          0,
-          0,
-          newCanvas.width,
-          newCanvas.height
-        );
-  
-        const newName = `file-${index}.png`;
-        const newDataUrl = newCanvas.toDataURL("image/png");
-        download(newDataUrl, newName);
-        index += 1;
-      };
-      img.src = dataUrl;
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'No hay imagen seleccionada para generarle miniaturas'
+      })
     }
   };
   
+  
+
   const handleGetLinks = async () => {
+
+    if (!isAuthenticated) {
+      Swal.fire({
+        title: '<strong>Login</strong>',
+        icon: 'info',
+        html:
+          'Debes loguearte para poder obtener los enlaces de vista previa.',
+        
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Great!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+      });
+      return;
+    }
     const images = Array.from(ref.current?.childNodes ?? []);
-    const links = await Promise.all(
-      images.map(async (image, index) => {
-        const dataUrl = await toPng(image as HTMLElement);
-        let name = "";
-        if (index === 0) name = "400x300";
-        else if (index === 1) name = "160x120";
-        else if (index === 2) name = "120x120";
-        const url = URL.createObjectURL(
-          await fetch(dataUrl).then((res) => res.blob())
-        );
-        return { name, url };
+  
+    try {
+      let links = await Promise.all(
+        images.map(async (image, index) => {
+          const dataUrl = await toPng(image as HTMLElement);
+          let name = "";
+          if (index === 0) name = "400x300";
+          else if (index === 1) name = "160x120";
+          else if (index === 2) name = "120x120";
+          const url = URL.createObjectURL(
+            await fetch(dataUrl).then((res) => res.blob())
+          );
+          return { name, url };
+        })
+      );
+  
+      setDownloadedImages(links);
+  
+      if (links.length === images.length) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Vistas previas generadas'
+        })
+      } /* else {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'error',
+          title: 'No hay imagen seleccionada para que se genere el links'
+        })
+      } */
+    } catch (error) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
       })
-    );
-    setDownloadedImages(links);
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
-    Toast.fire({
-      icon: 'success',
-      title: 'Signed in successfully'
-    })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'No hay imagen seleccionada para que se generen las vistas previas'
+      })
+    }
   };
+  
+  
+  
   
   const handleClearImage = () => {
     setImage("");
@@ -147,7 +250,25 @@ const App = () => {
       
       Toast.fire({
         icon: 'success',
-        title: 'Image cleared successfully'
+        title: 'Imagen limpiada'
+      })
+    }
+    else if (!image) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'No hay imagen para limpiar'
       })
     }
   };
@@ -184,18 +305,12 @@ const App = () => {
       return !prev;
     });
   };
-  
-  
-  
   /* ------------------------------------------------------------------------------------------------------------------- */
   /* ------------------------------------------------------------------------------------------------------------------- */
-
-
   return (
     <Container sx={{  maxWidth: 'none !important',border: 2, position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft:-8, marginRight:-10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
     <Navbar checked={checked} onChange={handleChange}  />
       <Grid container spacing={2} justifyContent="center" marginTop={10}>
-      
       
       <Collapse in={checked}>
         <Grid item  
@@ -219,9 +334,7 @@ const App = () => {
         </Grid>
         
         </Collapse>
-        
-      
-      
+
       <Grid item sx={{ marginLeft:"auto"}}>
         <Box textAlign="center" >
           <Canvas

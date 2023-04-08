@@ -75,13 +75,3 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
 };
 
 export default Sidebar;
-
-
-{/* <FormControl>
-              <FormLabel>File extension</FormLabel>
-              <Select defaultValue="png">
-                <MenuItem value="png">PNG</MenuItem>
-                <MenuItem value="jpg">JPG</MenuItem>
-                <MenuItem value="svg">SVG</MenuItem>
-              </Select>
-            </FormControl> */}
