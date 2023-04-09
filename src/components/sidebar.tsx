@@ -2,20 +2,12 @@ import React, { ReactNode, useState, useRef } from "react";
 import {
   Box,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
-  MenuItem,
-  Select,
-  TextField,
   Typography,
 } from "@material-ui/core";
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 import AutoAwesomeSharpIcon from '@mui/icons-material/AutoAwesomeSharp';
-import Section from "./section";
 import Camara from "./camara";
-import { toPng } from "html-to-image";
 
 
 type SidebarProps = {
@@ -39,7 +31,7 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
           {children}
           <Box title="" textAlign="center" >
           <Typography variant="h5"  style={{ marginBottom: '15px', textDecoration: 'underline'}}>Generate your thumbnail</Typography>
-          <Camara />
+          {/* <Camara /> */}
           </Box>
         </Box>
         <Box display="flex" flexDirection="column" alignItems="stretch" justifyContent="flex-end" margin="auto">
