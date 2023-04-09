@@ -2,7 +2,6 @@ import React, { createRef, RefObject, useState } from "react";
 import Webcam from "react-webcam";
 import Box from "@mui/material/Box";
 import { Button} from "@material-ui/core";
-import Swal from 'sweetalert2'
 interface CamaraState {
   imagen: string | null;
 }
@@ -16,7 +15,6 @@ const Camara = () => {
   const foto = (): void => {
     if (webcamRef.current) {
       const captura = webcamRef.current.getScreenshot();
-      console.log(captura);
       setState({ imagen: captura });
       setCapturaVisible(true);
     }

@@ -1,12 +1,10 @@
 import React  from "react";
-import { AppBar, Toolbar, Typography, Box, FormGroup, FormControlLabel, Switch} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Box, FormControlLabel, Switch} from "@material-ui/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "./auth0/login";
 import { LogoutButton } from "./auth0/logout";
 import  Profile  from "./auth0/profile";
 import { Link } from "react-router-dom";
-
-
 interface NavbarProps {
   checked: boolean;
   onChange: () => void;
@@ -36,7 +34,6 @@ const Navbar: React.FC<NavbarProps> = ({ checked, onChange }) => {
               <LogoutButton />
             </Box>
           )}
-
           {!isAuthenticated && <LoginButton />}
         </Box>
       </Toolbar>

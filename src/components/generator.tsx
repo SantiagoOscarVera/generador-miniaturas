@@ -1,12 +1,11 @@
 import React from "react";
-import { Typography, Box } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 type GeneratorProps = {
   image: string;
   position: { x: number; y: number };
   size: { width: number; height: number };
 };
-
 
 const Generator = React.forwardRef<HTMLDivElement, GeneratorProps>(
   ({ image }, ref) => {
@@ -23,9 +22,6 @@ const Generator = React.forwardRef<HTMLDivElement, GeneratorProps>(
                 width="100%"
                 height="100%"
               >
-                <Typography variant="h1" color="secondary">
-                  {index + 1}
-                </Typography>
               </Box>
               <img style={{ width: "100%", height: "100%", objectFit: "contain" }} src={image} alt="thumbnail layout" />
             </Box>

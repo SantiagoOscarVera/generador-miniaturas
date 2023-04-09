@@ -29,7 +29,6 @@ const App = () => {
   });
   const [downloadedImages, setDownloadedImages] = useState<{ name: string; url: string }[]>([]);
   
-  
   const ref = useRef<HTMLDivElement>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -38,7 +37,6 @@ const App = () => {
   }, []);
 
   const { isAuthenticated } = useAuth0();
-
 
   const handleDownload = async () => {
 
@@ -113,7 +111,6 @@ const App = () => {
         img.src = dataUrl;
       }
     } catch (error) {
-      /* console.error('Ocurrió un error durante la descarga: ', error); */
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -125,7 +122,6 @@ const App = () => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
       Toast.fire({
         icon: 'error',
         title: 'No hay imagen seleccionada para generarle miniaturas'
@@ -133,8 +129,6 @@ const App = () => {
     }
   };
   
-  
-
   const handleGetLinks = async () => {
 
     if (!isAuthenticated) {
@@ -185,29 +179,11 @@ const App = () => {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
           }
         })
-        
         Toast.fire({
           icon: 'success',
           title: 'Vistas previas generadas'
         })
-      } /* else {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-        
-        Toast.fire({
-          icon: 'error',
-          title: 'No hay imagen seleccionada para que se genere el links'
-        })
-      } */
+      }
     } catch (error) {
       const Toast = Swal.mixin({
         toast: true,
@@ -220,17 +196,13 @@ const App = () => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
       Toast.fire({
         icon: 'error',
         title: 'No hay imagen seleccionada para que se generen las vistas previas'
       })
     }
   };
-  
-  
-  
-  
+
   const handleClearImage = () => {
     setImage("");
     setDownloadedImages([]);

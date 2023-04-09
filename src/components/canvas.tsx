@@ -34,7 +34,7 @@ const Canvas = ({
         {image ? (
           <>
              <img
-            style={{ maxWidth: "100%", maxHeight: "100%", marginTop: "15%" }}
+            style={{ maxWidth: "80%", maxHeight: "100%", /* marginTop: "15%" */ marginLeft:"10%" }}
             src={image}
             alt="thumbnail layout"
           />
@@ -56,22 +56,3 @@ const Canvas = ({
 };
 
 export default Canvas;
-
-              {/* <Flex
-                align="center"
-                justify="center"
-                w="100%"
-                h="100%"
-                border="2pt dashed"
-                borderColor="white"
-              >
-                <Text
-                  color={`#${fontSettings.color}`}
-                  fontSize={fontSettings.size}
-                  fontFamily={fontSettings.family}
-                  fontStyle={fontSettings.style}
-                  fontWeight={fontSettings.weight}
-                >
-                  01
-                </Text>
-              </Flex> */}

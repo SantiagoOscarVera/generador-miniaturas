@@ -30,16 +30,25 @@ type ImageDropzoneProps = {
 
 const ImageDropzone = ({ onDrop }: ImageDropzoneProps) => {
   const webcamRef: RefObject<Webcam> = createRef<Webcam>();
-  const [state, setState] = useState<CamaraState>({ imagen: null });
+  const [state, setState] = useState<CamaraState>({ imagen: null});
   const [camaraVisible, setCamaraVisible] = useState<boolean>(false);
   const [capturaVisible, setCapturaVisible] = useState<boolean>(false);
+
+  const actualizarFoto = (imagen: string): void => {
+    setState(prevState => ({ ...prevState, imagen }));
+  };
 
   const tomarFoto = (): void => {
     if (webcamRef.current) {
       const captura = webcamRef.current.getScreenshot();
-      console.log(captura);
-      setState({ imagen: captura });
-      setCapturaVisible(true);
+      if (captura) {
+        if (state.imagen) {
+          actualizarFoto(captura);
+        } else {
+          setState({ imagen: captura });
+        }
+        setCapturaVisible(true);
+      }
     }
   };
 
@@ -101,7 +110,6 @@ const ImageDropzone = ({ onDrop }: ImageDropzoneProps) => {
       onDrop([imagenArchivo]);
     }
   };
-  
       
       const dataURLtoBlob = (dataURL: string): Blob => {
       const byteString = atob(dataURL.split(',')[1]);
@@ -115,78 +123,89 @@ const ImageDropzone = ({ onDrop }: ImageDropzoneProps) => {
       };
       
       return (
-      <>
-      <Box {...getRootProps()} onClick={handleBoxClick} sx={{ p: 3, bgcolor: 'grey.300', cursor: 'pointer' }}>
-          <input {...getInputProps()} className={classes.hidden} />
-          {loading ? (
-          <Box className={classes.root}>
-          <CircularProgress />
-          </Box>
-          ) : (
-          <>
-            <Typography variant="h6" align="center">
-                Arrastre o haga clic aquí para elegir imagen o sacar una foto
-            </Typography>
-          {showImage && (
-            <img
-            src="https://via.placeholder.com/150"
-            alt="Imagen seleccionada"
-            style={{ display: 'block', margin: 'auto', marginTop: '1rem' }}
-            />
-            )
-          }
-          </>
-          )}
+        <>
+          <Box {...getRootProps()} onClick={handleBoxClick} sx={{
+            border: '1px dashed',
+            borderColor: 'currentColor',
+            backgroundColor: "#eceff1",
+            width: 600,
+            height: 400,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: "pointer",
+          }}>
+            <input {...getInputProps()} className={classes.hidden} />
+            {loading ? (
+              <Box className={classes.root}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              <>
+                <Typography variant="h6" align="center">
+                  Arrastre o haga clic aquí para elegir imagen o sacar una foto
+                </Typography>
+                {showImage && (
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt="Imagen seleccionada"
+                    style={{ display: 'block', margin: 'auto', marginTop: '1rem' }}
+                  />
+                )}
+                {camaraVisible && (
+                  <Dialog open={camaraVisible} onClose={toggleCamara} maxWidth="md" fullWidth>
+                    <DialogTitle>Tome una foto</DialogTitle>
+                    <DialogContent>
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Webcam
+                          audio={false}
+                          ref={webcamRef}
+                          screenshotFormat="image/jpeg"
+                          style={{ width: '100%' }}
+                        />
+                      </div>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={toggleCamara}>Cancelar</Button>
+                      <Button onClick={handleFoto} color="primary">Tomar foto</Button>
+                    </DialogActions>
+                  </Dialog>
+                )}
+                {capturaVisible && (
+                  <Dialog open={capturaVisible} onClose={ocultarCaptura} maxWidth="sm" fullWidth>
+                    <DialogTitle>Previsualización de la foto</DialogTitle>
+                    <DialogContent>
+                      <img
+                        src={state.imagen || ''}
+                        alt="Foto capturada"
+                        style={{ display: 'block', margin: 'auto', maxHeight: '400px' }}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={ocultarCaptura}>Cancelar</Button>
+                      <Button onClick={handleGuardarFoto} color="primary">Guardar</Button>
+                    </DialogActions>
+                  </Dialog>
+                )}
+              </>
+            )}
           </Box>
           <Dialog open={openDialog} onClose={() => handleDialogClose(false)}>
-            <DialogTitle>Cargar imagen o usar camara</DialogTitle>
+            <DialogTitle>Cargar imagen o usar cámara</DialogTitle>
             <DialogContent>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button variant="contained" onClick={toggleCamara}>
-                {camaraVisible ? 'Volver' : 'Usar cámara'}
+                  Usar cámara
                 </Button>
-                
-                {camaraVisible && (
-                <>
-                <Webcam
-                audio={false}
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-                videoConstraints={{ width: 640, height: 360, facingMode: 'user' }}
-                style={{ display: capturaVisible ? 'none' : 'block', margin: 'auto' }}
-                />
-                {capturaVisible && (
-                <img
-                src={state.imagen ?? ''}
-                alt="Imagen capturada"
-                style={{ display: 'block', margin: 'auto', maxWidth: '100%', maxHeight: '80vh' }}
-                />
-                )}
-                </>
-                )}
-            </DialogContent>
-            <DialogContent>
-            <Button variant="contained" onClick={() => handleDialogClose(true)}>
-                  Subir imagen
-                </Button>
+              </div>
             </DialogContent>
             <DialogActions>
-                {capturaVisible && (
-                <Button variant="contained" color="primary" onClick={handleGuardarFoto}>
-                Usar foto
-                </Button>
-                )}
-                <DialogActions>
-    <Button onClick={() => handleDialogClose(false)}>Cancelar</Button>
-  </DialogActions>
-                {camaraVisible && (
-                <Button variant="contained" color="primary" onClick={handleFoto}>
-                Tomar foto
-                </Button>
-                )}
+              <Button onClick={() => handleDialogClose(true)}>Cargar imagen</Button>
+              <Button onClick={() => handleDialogClose(false)}>Cancelar</Button>
             </DialogActions>
           </Dialog>
-      </>
+        </>
       );
-      };
+                }    
 
       export default ImageDropzone

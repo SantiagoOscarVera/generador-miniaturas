@@ -1,14 +1,8 @@
-import React, { ReactNode, useState, useRef } from "react";
-import {
-  Box,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import React, { ReactNode } from "react";
+import {Box, Button, Typography} from "@material-ui/core";
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 import AutoAwesomeSharpIcon from '@mui/icons-material/AutoAwesomeSharp';
-import Camara from "./camara";
-
 
 type SidebarProps = {
   children: ReactNode;
@@ -31,7 +25,6 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
           {children}
           <Box title="" textAlign="center" >
           <Typography variant="h5"  style={{ marginBottom: '15px', textDecoration: 'underline'}}>Generate your thumbnail</Typography>
-          {/* <Camara /> */}
           </Box>
         </Box>
         <Box display="flex" flexDirection="column" alignItems="stretch" justifyContent="flex-end" margin="auto">
