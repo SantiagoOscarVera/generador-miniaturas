@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ checked, onChange }) => {
       <Toolbar style={{ minHeight: "40px" }}>
         <Grid container justifyContent="space-between" alignItems="center" >
 
-          <Grid item xs={1} sm={4} style={{ justifyContent: "flex-start",  }} className= "titulo">
+          <Grid item xs={4} sm={4} style={{ justifyContent: "flex-start",  }} className= "titulo">
             <Link
               to="/"
               style={{ textDecoration: "none", color: "inherit" }}
@@ -37,14 +37,20 @@ const Navbar: React.FC<NavbarProps> = ({ checked, onChange }) => {
             </Link>
           </Grid>
 
-          <Grid item xs={12} sm={4} style={{ justifyContent: "center", maxWidth:"19%" }} className= "Vista" container justifyContent="center">
-            <FormControlLabel
-              control={<Switch checked={checked} onChange={onChange} />}
-              label="Activar vista previa"
-            />
-          </Grid>
+          <Grid item xs={12} sm={4} style={{ justifyContent: "center", maxWidth: "19%" }} className="Vista" container justifyContent="center">
+  <FormControlLabel
+    control={<Switch size="small" checked={checked} onChange={onChange} />}
+    label={
+      <Typography 
+        variant="body2" 
+        style={{ fontSize: "75%", lineHeight: "1" }}>
+        Activar vista previa
+      </Typography>
+    }
+  />
+</Grid>
 
-          <Grid item xs={4} sm={4} container className= "profile">
+          <Grid item xs={3} sm={4} container className= "profile">
                 <Grid container direction="row-reverse" alignItems="center" spacing={1} >
                   {isAuthenticated && (
                     <>
