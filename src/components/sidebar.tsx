@@ -24,7 +24,7 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
         <Box className="box2"  >
           {children}
           <Box title="" textAlign="center" >
-          <Typography variant="h5"  style={{ marginBottom: '15px', textDecoration: 'underline'}}>Generate your thumbnail</Typography>
+          <Typography variant="h5"  style={{ marginBottom: '15px', textDecoration: 'underline'}}>Generá tu miniatura</Typography>
           </Box>
         </Box>
         <Box display="flex" flexDirection="column" alignItems="stretch" justifyContent="flex-end" margin="auto">
@@ -34,7 +34,7 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
           style={{backgroundColor: "#eceff1", marginBottom: "5%", fontSize: "12px"}} 
           startIcon={< AutoAwesomeSharpIcon />}
           onClick={onClear}>
-            Clear image
+            Limpiar imagen {/* Clear image */}
           </Button>
           <Button 
           size="small"
@@ -42,7 +42,7 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
           style={{ marginBottom: "5%", fontSize: "12px"}}
           startIcon={< OpenInNewSharpIcon />} 
           onClick={onLinks}>
-            Previous image links
+            Generar vistas previas{/* Previous image links */}
           </Button>
           <Button
           size="small"
@@ -51,7 +51,7 @@ const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
             startIcon={<CloudDownloadIcon />}
             onClick={onDownload}
           >
-            Download
+            Descargar{/* Download */}
           </Button>
         </Box>
       </Box>

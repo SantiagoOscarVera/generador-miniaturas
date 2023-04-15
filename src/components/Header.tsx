@@ -70,7 +70,7 @@ const Header: React.FC = () => {
       <Collapse in={checked} timeout={1000} collapsedHeight={50}>
         <div className={classes.container}>
           <h1 className={classes.title}>
-            Welcome to <br />
+            Bienvenido a{/* Welcome to */} <br />
             Thumbnail<span className={classes.colorText}> Generator.</span>
           </h1>
           <Scroll to="place-to-visit" smooth={true}>

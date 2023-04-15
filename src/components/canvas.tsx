@@ -29,14 +29,16 @@ const Canvas = ({
   return (
     <Box  height="100%" width="100%">
       <Box  display= "flex"
-    justify-content= "center"
-    align-items= "center" >
+            justify-content= "center"
+            align-items= "center" 
+            >
         {image ? (
           <>
              <img
-            style={{ maxWidth: "80%", maxHeight: "100%", /* marginTop: "15%" */ marginLeft:"10%" }}
+            style={{  maxWidth: "80%", maxHeight: "70vh", height:"100%", width:"100%", marginLeft:"10%" }}
             src={image}
             alt="thumbnail layout"
+            
           />
             <Rnd
               position={position}

@@ -49,8 +49,8 @@ const App = () => {
         
         focusConfirm: false,
         confirmButtonText:
-          '<i class="fa fa-thumbs-up"></i> Great!',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
+          '<i class="fa fa-thumbs-up"></i> Entendido',
+        confirmButtonAriaLabel: 'Thumbs up, Entendido!',
         cancelButtonText:
           '<i class="fa fa-thumbs-down"></i>',
         cancelButtonAriaLabel: 'Thumbs down'
@@ -140,8 +140,8 @@ const App = () => {
         
         focusConfirm: false,
         confirmButtonText:
-          '<i class="fa fa-thumbs-up"></i> Great!',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
+          '<i class="fa fa-thumbs-up"></i> Entendido!',
+        confirmButtonAriaLabel: 'Thumbs up, Entendido!',
         cancelButtonText:
           '<i class="fa fa-thumbs-down"></i>',
         cancelButtonAriaLabel: 'Thumbs down'
@@ -222,7 +222,7 @@ const App = () => {
       
       Toast.fire({
         icon: 'success',
-        title: 'Imagen limpiada'
+        title: 'Imagen borrada'
       })
     }
     else if (!image) {
@@ -263,12 +263,12 @@ const App = () => {
           title: '<strong>Vista previa </strong>',
           icon: 'info',
           html:
-            'Cuando haya una imagen o foto en el centro, haz click en <b>"Previous image links"</b>, para que aparezcan las vistas previas.',
+            'Cuando haya una imagen o foto en el centro, haz click en <b>"Generar vistas previas"</b>, para que aparezcan las vistas previas.',
           
           focusConfirm: false,
           confirmButtonText:
-            '<i class="fa fa-thumbs-up"></i> Great!',
-          confirmButtonAriaLabel: 'Thumbs up, great!',
+            '<i class="fa fa-thumbs-up"></i> Entendido!',
+          confirmButtonAriaLabel: 'Thumbs up, Entendido!',
           cancelButtonText:
             '<i class="fa fa-thumbs-down"></i>',
           cancelButtonAriaLabel: 'Thumbs down'
@@ -285,12 +285,12 @@ const App = () => {
       <Grid container spacing={2} justifyContent="center" marginTop={10}>
       
       <Collapse in={checked}>
-        <Grid item  
-          className="vista previa"
+        <Grid item  lg={4}
+          className="grid0"
           minWidth={110}
           minHeight={200}
           borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
-          sx={{ backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:"80%" }}
+          sx={{ marginLeft: "30%", order: 3, backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:"80%" }}
           >
             
           <Typography variant="h6"  mb="15%"  fontSize={18} style={{ textDecoration: 'underline', marginLeft:"-1%"}}>
@@ -307,7 +307,8 @@ const App = () => {
         
         </Collapse>
 
-      <Grid item sx={{ marginLeft:"auto"}}>
+      <Grid item  className="grid1" xs={12} lg={6}
+      sx={{ marginLeft:"auto", order: 1}}>
         <Box textAlign="center" >
           <Canvas
             fontSettings={fontSettings}
@@ -331,7 +332,8 @@ const App = () => {
         </Box>
       </Grid>
       
-          <Grid item className="grid2" sx={{ display: 'flex', justifyContent: 'flex-end', marginLeft:"auto",/*  marginTop:"-2%", */ marginBottom:"50%"}}>
+          <Grid item lg={2}
+          className="grid2" sx={{ order: 2, display: 'flex', justifyContent: 'flex-end', marginLeft:"auto",/*  marginTop:"-2%", */ marginBottom:"50%" }}>
             <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" sx={{backgroundColor: "#eceff1"}}>
               <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
               </Sidebar>
