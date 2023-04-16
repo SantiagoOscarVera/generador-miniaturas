@@ -285,12 +285,12 @@ const App = () => {
       <Grid container spacing={2} justifyContent="center" marginTop={10}  >
       
       <Collapse in={checked}>
-        <Grid item  xs={3} sm={2} md={6} lg={4}
+        <Grid item  xs={1} sm={2} md={6} lg={1} /* order={{xs: 0, sm:0, md:0, lg:0, xl:0 }} */
           className="grid0"
           minWidth={110}
           minHeight={200}
           borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
-          sx={{ /* marginLeft: "30%", */ order: 3, backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:"80%" }}
+          sx={{ backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:{xs:"-136%", sm:"80%"} }}
           >
             
           <Typography variant="h6"  mb="15%"  fontSize={18} style={{ textDecoration: 'underline', marginLeft:"-1%"}}>
@@ -307,8 +307,8 @@ const App = () => {
         
         </Collapse>
 
-      <Grid item  className="grid1" xs={12} sm={5} md={6} lg={6}
-      sx={{ marginLeft:"auto", order: 1}}>
+      <Grid item  className="grid1" xs={12} sm={5} md={6} lg={6} order={{xs: -1, sm:0, md:0, lg:0, xl:1 }}
+      sx={{ marginLeft:"auto"}}>
         <Box textAlign="center" >
           <Canvas
             fontSettings={fontSettings}
@@ -332,8 +332,8 @@ const App = () => {
         </Box>
       </Grid>
       
-          <Grid item className="grid2" sm={4} md={1} lg={2}  
-           sx={{ order: 2, display: 'flex', justifyContent: 'flex-end', marginLeft: { xs: 0, sm: 'auto' }, marginBottom:"50%"}}>
+          <Grid item className="grid2" xs={12} sm={4} md={3} lg={2}  order={{xs: -1, sm:0, md:0, lg:0, xl:0 }}
+           sx={{  display: 'flex', justifyContent: {xs: 'center', sm: 'flex-end'}, marginLeft: { xs: 0, sm: 'auto' }, marginBottom:"50%"}}>
             <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" sx={{backgroundColor: "#eceff1"}}>
               <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
               </Sidebar>
