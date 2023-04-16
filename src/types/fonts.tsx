@@ -1,3 +1,5 @@
+import React from "react";
+/* 
 export type FontFamily = string;
 export type FontWeight = string;
 export type FontStyle = string;
@@ -12,4 +14,4 @@ type FontProperties = {
   color: string;
 };
 
-export default FontProperties;
+export default FontProperties; */

@@ -1,29 +1,28 @@
 import React from "react";
 import ImageDropzone from "./image-dropzone";
 import { Rnd, RndDragCallback, RndResizeCallback } from "react-rnd";
-import Position from "../types/position";
+/* import Position from "../types/position"; */
 import Size from "../types/size";
-import FontProperties from "../types/fonts";
+/* import FontProperties from "../types/fonts"; */
 import {Box} from "@material-ui/core";
 
 
 type CanvasProps = {
   image: string;
-  position: Position;
+  /* position: Position; */
   size: Size;
-  fontSettings: FontProperties;
+  /* fontSettings: FontProperties; */
   onDrop: (files: File[]) => void;
-  onDrag: RndDragCallback;
+  /* onDrag: RndDragCallback; */
   onResize: RndResizeCallback;
 };
 
 const Canvas = ({
   image,
-  fontSettings,
-  position,
+  /* position, */
   size,
   onDrop,
-  onDrag,
+  /* onDrag, */
   onResize,
 }: CanvasProps) => {
   return (
@@ -41,9 +40,9 @@ const Canvas = ({
             
           />
             <Rnd
-              position={position}
+              /* position={position} */
               size={size}
-              onDragStop={onDrag}
+              /* onDragStop={onDrag} */
               onResizeStop={onResize}
               bounds="parent"
             >

@@ -1,4 +1,5 @@
-import { FontFamily, FontStyle, FontVariant, FontWeight } from "../types/fonts";
+import React from "react";
+/* import { FontFamily, FontStyle, FontVariant, FontWeight } from "../types/fonts";
 
 export const convertVariantToText = (variant: string) => {
   const names: Record<FontWeight, string> = {
@@ -45,4 +46,4 @@ export const extractFontWeight = (variant: FontVariant): FontWeight => {
 export const extractFontStyle = (variant: FontVariant): FontStyle => {
   const match = variant.match(/(\d+|regular)?(\w*)/);
   return match ? match[2] : "regular";
-};
+}; */

@@ -5,7 +5,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Webcam from "react-webcam";
 import { Button} from "@material-ui/core";
-
 interface CamaraState {
   imagen: string | null;
 }
@@ -92,10 +91,6 @@ const ImageDropzone = ({ onDrop }: ImageDropzoneProps) => {
         inputElement.dispatchEvent(event);
       }
     }
-    setOpenDialog(false);
-  };
-  
-  const handleCloseDialog = () => {
     setOpenDialog(false);
   };
 

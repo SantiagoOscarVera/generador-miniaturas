@@ -3,7 +3,7 @@ import { Box } from "@material-ui/core";
 
 type GeneratorProps = {
   image: string;
-  position: { x: number; y: number };
+  /* position: { x: number; y: number }; */
   size: { width: number; height: number };
 };
 
@@ -12,7 +12,7 @@ const Generator = React.forwardRef<HTMLDivElement, GeneratorProps>(
     return (
       <Box position="fixed" top="100vh">
         <div ref={ref}>
-          {[{ width:534, height: 400 }, { width: 214, height: 160 }, { width: 160, height: 160 }].map((size, index) => (
+          {[{ width:400, height: 300 }, { width: 160, height: 120 }, { width: 120, height: 120 }].map((size, index) => ( // tamaños de las vistas previas
             <Box key={index} width={size.width} height={size.height} position="relative" overflow="hidden">
               <Box
                 alignItems="center"

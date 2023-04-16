@@ -14,7 +14,7 @@ type SidebarProps = {
 const Sidebar = ({ children, onDownload, onClear, onLinks }: SidebarProps) => {
 
   return (
-    <Box /* minWidth={360} */ maxWidth="200px" sx={{ border: 1}} style={{
+    <Box maxWidth="200px" sx={{ border: 1}} style={{
       display: "flex",
       justifyContent: "center",
       alignItems: "center",

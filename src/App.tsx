@@ -5,7 +5,7 @@ import Canvas from "./components/canvas";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
 import Generator from "./components/generator";
-import FontProperties from "./types/fonts";
+/* import FontProperties from "./types/fonts"; */
 import WebFont from "webfontloader";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -17,16 +17,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
   const [image, setImage] = useState("");
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  /* const [position, setPosition] = useState({ x: 0, y: 0 }); */
   const [size, setSize] = useState({ width: 20, height: 20 });
-  const [fontSettings, setFontSettings] = useState<FontProperties>({
+/*   const [fontSettings, setFontSettings] = useState<FontProperties>({
     color: "fff",
     weight: "regular",
     style: "regular",
     family: "Roboto",
     variant: "regular",
     size: 10,
-  });
+  }); */
   const [downloadedImages, setDownloadedImages] = useState<{ name: string; url: string }[]>([]);
   
   const ref = useRef<HTMLDivElement>(null);
@@ -246,13 +246,13 @@ const App = () => {
   };
   
 
-  useEffect(() => {
+  /* useEffect(() => {
     WebFont.load({
       google: {
         families: [`${fontSettings.family}:${fontSettings.variant}`],
       },
     });
-  }, [fontSettings.family, fontSettings.variant]);
+  }, [fontSettings.family, fontSettings.variant]); */
 
   const [checked, setChecked] = React.useState(false);
 
@@ -285,7 +285,7 @@ const App = () => {
       <Grid container spacing={2} justifyContent="center" marginTop={10}  >
       
       <Collapse in={checked}>
-        <Grid item  xs={1} sm={2} md={6} lg={1} /* order={{xs: 0, sm:0, md:0, lg:0, xl:0 }} */
+        <Grid item  xs={1} sm={2} md={6} lg={1} 
           className="grid0"
           minWidth={110}
           minHeight={200}
@@ -311,21 +311,21 @@ const App = () => {
       sx={{ marginLeft:"auto"}}>
         <Box textAlign="center" >
           <Canvas
-            fontSettings={fontSettings}
+            /* fontSettings={fontSettings} */
             image={image}
-            position={position}
+            /* position={position} */
             size={size}
             onDrop={onDrop}
-            onDrag={(event, delta) => {
+            /* onDrag={(event, delta) => {
               setPosition({ x: delta.x, y: delta.y });
-            }}
+            }} */
             onResize={(event, direction, { style }, delta, position) => {
               setSize({
                 width: parseInt(style.width),
                 height: parseInt(style.height),
 
               });
-              setPosition(position);
+              /* setPosition(position); */
             }}
             
           />
@@ -341,7 +341,7 @@ const App = () => {
           </Grid>
           
       </Grid>
-      <Generator ref={ref} image={image} position={position} size={size} />
+      <Generator ref={ref} image={image} /* position={position} */ size={size} />
       
       
     </Container>
