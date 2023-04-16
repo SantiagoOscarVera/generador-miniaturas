@@ -282,15 +282,15 @@ const App = () => {
   return (
     <Container sx={{  maxWidth: 'none !important',border: 2, position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft:-8, marginRight:-10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
     <Navbar checked={checked} onChange={handleChange}  />
-      <Grid container spacing={2} justifyContent="center" marginTop={10}>
+      <Grid container spacing={2} justifyContent="center" marginTop={10}  >
       
       <Collapse in={checked}>
-        <Grid item  lg={4}
+        <Grid item  xs={3} sm={2} md={6} lg={4}
           className="grid0"
           minWidth={110}
           minHeight={200}
           borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
-          sx={{ marginLeft: "30%", order: 3, backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:"80%" }}
+          sx={{ /* marginLeft: "30%", */ order: 3, backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:"80%" }}
           >
             
           <Typography variant="h6"  mb="15%"  fontSize={18} style={{ textDecoration: 'underline', marginLeft:"-1%"}}>
@@ -307,7 +307,7 @@ const App = () => {
         
         </Collapse>
 
-      <Grid item  className="grid1" xs={12} lg={6}
+      <Grid item  className="grid1" xs={12} sm={5} md={6} lg={6}
       sx={{ marginLeft:"auto", order: 1}}>
         <Box textAlign="center" >
           <Canvas
@@ -332,8 +332,8 @@ const App = () => {
         </Box>
       </Grid>
       
-          <Grid item lg={2}
-          className="grid2" sx={{ order: 2, display: 'flex', justifyContent: 'flex-end', marginLeft:"auto",/*  marginTop:"-2%", */ marginBottom:"50%" }}>
+          <Grid item className="grid2" sm={4} md={1} lg={2}  
+           sx={{ order: 2, display: 'flex', justifyContent: 'flex-end', marginLeft: { xs: 0, sm: 'auto' }, marginBottom:"50%"}}>
             <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" sx={{backgroundColor: "#eceff1"}}>
               <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
               </Sidebar>
