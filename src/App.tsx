@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 import Canvas from "./components/canvas";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
 import Generator from "./components/generator";
-/* import FontProperties from "./types/fonts"; */
-import WebFont from "webfontloader";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { Grid, Typography } from "@mui/material";
@@ -17,16 +15,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
   const [image, setImage] = useState("");
-  /* const [position, setPosition] = useState({ x: 0, y: 0 }); */
   const [size, setSize] = useState({ width: 20, height: 20 });
-/*   const [fontSettings, setFontSettings] = useState<FontProperties>({
-    color: "fff",
-    weight: "regular",
-    style: "regular",
-    family: "Roboto",
-    variant: "regular",
-    size: 10,
-  }); */
   const [downloadedImages, setDownloadedImages] = useState<{ name: string; url: string }[]>([]);
   
   const ref = useRef<HTMLDivElement>(null);
@@ -244,15 +233,6 @@ const App = () => {
       })
     }
   };
-  
-
-  /* useEffect(() => {
-    WebFont.load({
-      google: {
-        families: [`${fontSettings.family}:${fontSettings.variant}`],
-      },
-    });
-  }, [fontSettings.family, fontSettings.variant]); */
 
   const [checked, setChecked] = React.useState(false);
 
@@ -311,21 +291,14 @@ const App = () => {
       sx={{ marginLeft:"auto"}}>
         <Box textAlign="center" >
           <Canvas
-            /* fontSettings={fontSettings} */
             image={image}
-            /* position={position} */
             size={size}
             onDrop={onDrop}
-            /* onDrag={(event, delta) => {
-              setPosition({ x: delta.x, y: delta.y });
-            }} */
-            onResize={(event, direction, { style }, delta, position) => {
+            onResize={(event, direction, { style }) => {
               setSize({
                 width: parseInt(style.width),
                 height: parseInt(style.height),
-
               });
-              /* setPosition(position); */
             }}
             
           />
@@ -341,7 +314,7 @@ const App = () => {
           </Grid>
           
       </Grid>
-      <Generator ref={ref} image={image} /* position={position} */ size={size} />
+      <Generator ref={ref} image={image} size={size} />
       
       
     </Container>

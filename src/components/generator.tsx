@@ -3,7 +3,6 @@ import { Box } from "@material-ui/core";
 
 type GeneratorProps = {
   image: string;
-  /* position: { x: number; y: number }; */
   size: { width: number; height: number };
 };
 

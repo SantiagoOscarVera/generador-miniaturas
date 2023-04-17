@@ -1,6 +1,6 @@
+
 import * as React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import '@fontsource/roboto/300.css';
@@ -8,7 +8,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
-import { Auth0Provider, Auth0ProviderOptions } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router/index";
 
@@ -27,7 +27,6 @@ const auth0Options: MyAuth0ProviderOptions = {
 ReactDOM.render(
   <ScopedCssBaseline>
     <Auth0Provider {...auth0Options}>
-      {/* <App /> */}
       <RouterProvider router={router} />
     </Auth0Provider>
   </ScopedCssBaseline>,
