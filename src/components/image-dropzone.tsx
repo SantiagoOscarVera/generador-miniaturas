@@ -138,7 +138,7 @@ const ImageDropzone = ({ onDrop }: ImageDropzoneProps) => {
         ) : (
           <>
             <Typography variant="h6" align="center">
-              Arrastre o haga clic aquí para elegir imagen o sacar una foto
+              Arrastre o haga clic aquí para elegir imagen/sacar una foto
             </Typography>
             {showImage && (
               <img

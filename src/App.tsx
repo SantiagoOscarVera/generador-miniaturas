@@ -260,7 +260,7 @@ const App = () => {
   /* ------------------------------------------------------------------------------------------------------------------- */
   /* ------------------------------------------------------------------------------------------------------------------- */
   return (
-    <Container sx={{ maxWidth: 'none !important', border: 2, position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft: -8, marginRight: -10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
+    <Container sx={{ maxWidth: 'none !important', position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft: -8, marginRight: -10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
       <Navbar checked={checked} onChange={handleChange} />
       <Grid container spacing={2} justifyContent="center" marginTop={10}  >
 
