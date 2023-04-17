@@ -59,10 +59,10 @@ const Header: React.FC = () => {
           <h1 className={classes.appbarTitle}>
             <span className={classes.colorText}> Santiago Vera,</span> Web Developer
           </h1>
-          <Link to="/home"> 
-          <IconButton>
-            < HomeRoundedIcon className={classes.icon}/>
-          </IconButton>
+          <Link to="/home">
+            <IconButton>
+              < HomeRoundedIcon className={classes.icon} />
+            </IconButton>
           </Link>
         </Toolbar>
       </AppBar>
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
       <Collapse in={checked} timeout={1000} collapsedHeight={50}>
         <div className={classes.container}>
           <h1 className={classes.title}>
-            Bienvenido a{/* Welcome to */} <br />
+            Bienvenido a <br />
             Thumbnail<span className={classes.colorText}> Generator.</span>
           </h1>
           <Scroll to="place-to-visit" smooth={true}>

@@ -1,7 +1,7 @@
 import React, { createRef, RefObject, useState } from "react";
 import Webcam from "react-webcam";
 import Box from "@mui/material/Box";
-import { Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 interface CamaraState {
   imagen: string | null;
 }
@@ -45,29 +45,29 @@ const Camara = () => {
       )}
       <br />
       {camaraVisible && (
-        <Button variant="contained" 
-        color="primary" 
-        size="small" 
-        style={{ marginBottom: '2%', fontSize: "10px" }} 
-        onClick={foto}>Hacer captura</Button>
+        <Button variant="contained"
+          color="primary"
+          size="small"
+          style={{ marginBottom: '2%', fontSize: "10px" }}
+          onClick={foto}>Hacer captura</Button>
       )}
       <br />
-      <Button variant="contained" 
+      <Button variant="contained"
         color="default"
         size="small"
-          style={{ marginBottom: '57px', fontSize: "10px" }} 
-          onClick={toggleCamara}>
-          {camaraVisible ? "Ocultar cámara" : "Mostrar cámara"}
+        style={{ marginBottom: '57px', fontSize: "10px" }}
+        onClick={toggleCamara}>
+        {camaraVisible ? "Ocultar cámara" : "Mostrar cámara"}
       </Button>
       {capturaVisible && (
         <Box style={{ marginTop: '-13%' }}>
-          
-          <img src={state.imagen || ""} alt="" height="125" width="180" margin-top= '-100px' />
+
+          <img src={state.imagen || ""} alt="" height="125" width="180" margin-top='-100px' />
           <br />
-          <Button variant="contained" 
-            color="default" 
-            size="small" 
-            style={{ marginBottom: '10%', fontSize: "10px" }} 
+          <Button variant="contained"
+            color="default"
+            size="small"
+            style={{ marginBottom: '10%', fontSize: "10px" }}
             onClick={ocultarCaptura}>Ocultar captura</Button>
         </Box>
       )}

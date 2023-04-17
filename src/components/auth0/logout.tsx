@@ -12,13 +12,13 @@ export const LogoutButton = () => {
 
   return (
     <Box display="flex" justifyContent="flex-end">
-      <Button 
-        style={{ backgroundColor: "#065fd4", color:"black", minWidth:0 }} 
-        size="small" 
-        variant="outlined"  
+      <Button
+        style={{ backgroundColor: "#065fd4", color: "black", minWidth: 0 }}
+        size="small"
+        variant="outlined"
         onClick={() => logout({ returnTo: window.location.origin } as CustomLogoutOptions)}
-      > 
-        <LogoutIcon style={{ fontSize: "16px" }}/>
+      >
+        <LogoutIcon style={{ fontSize: "16px" }} />
       </Button>
     </Box>
   );

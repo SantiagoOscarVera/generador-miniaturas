@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ checked, onChange }) => {
       <Toolbar style={{ minHeight: "40px" }}>
         <Grid container justifyContent="space-between" alignItems="center" >
 
-          <Grid item xs={4} sm={4} style={{ justifyContent: "flex-start",  }} className= "titulo">
+          <Grid item xs={4} sm={4} style={{ justifyContent: "flex-start", }} className="titulo">
             <Link
               to="/"
               style={{ textDecoration: "none", color: "inherit" }}
@@ -37,37 +37,37 @@ const Navbar: React.FC<NavbarProps> = ({ checked, onChange }) => {
           </Grid>
 
           <Grid item xs={10} sm={4} style={{ justifyContent: "center", maxWidth: "19%" }} className="Vista" container justifyContent="center">
-  <FormControlLabel
-    control={<Switch size="small" checked={checked} onChange={onChange} />}
-    label={
-      <Typography 
-        variant="body2" 
-        style={{ fontSize: "75%", lineHeight: "1" }}>
-        Activar vista previa
-      </Typography>
-    }
-  />
-</Grid>
+            <FormControlLabel
+              control={<Switch size="small" checked={checked} onChange={onChange} />}
+              label={
+                <Typography
+                  variant="body2"
+                  style={{ fontSize: "75%", lineHeight: "1" }}>
+                  Activar vista previa
+                </Typography>
+              }
+            />
+          </Grid>
 
-          <Grid item xs={4} sm={4} container className= "profile">
-                <Grid container direction="row-reverse" alignItems="center" spacing={1} >
-                  {isAuthenticated && (
-                    <>
-                      <Grid >
-                        <LogoutButton />
-                      </Grid>
-                      <Grid >
-                        <Profile />
-                      </Grid>
-                    </>
-                  )}
-                  {!isAuthenticated && (
-                    <Grid item>
-                      <LoginButton />
-                    </Grid>
-                  )}
+          <Grid item xs={4} sm={4} container className="profile">
+            <Grid container direction="row-reverse" alignItems="center" spacing={1} >
+              {isAuthenticated && (
+                <>
+                  <Grid >
+                    <LogoutButton />
+                  </Grid>
+                  <Grid >
+                    <Profile />
+                  </Grid>
+                </>
+              )}
+              {!isAuthenticated && (
+                <Grid item>
+                  <LoginButton />
                 </Grid>
-</Grid>
+              )}
+            </Grid>
+          </Grid>
 
         </Grid>
       </Toolbar>

@@ -11,7 +11,7 @@ const Generator = React.forwardRef<HTMLDivElement, GeneratorProps>(
     return (
       <Box position="fixed" top="100vh">
         <div ref={ref}>
-          {[{ width:400, height: 300 }, { width: 160, height: 120 }, { width: 120, height: 120 }].map((size, index) => ( // tamaños de las vistas previas
+          {[{ width: 400, height: 300 }, { width: 160, height: 120 }, { width: 120, height: 120 }].map((size, index) => ( // tamaños de las vistas previas
             <Box key={index} width={size.width} height={size.height} position="relative" overflow="hidden">
               <Box
                 alignItems="center"

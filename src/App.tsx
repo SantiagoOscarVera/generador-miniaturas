@@ -17,7 +17,7 @@ const App = () => {
   const [image, setImage] = useState("");
   const [size, setSize] = useState({ width: 20, height: 20 });
   const [downloadedImages, setDownloadedImages] = useState<{ name: string; url: string }[]>([]);
-  
+
   const ref = useRef<HTMLDivElement>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -35,7 +35,7 @@ const App = () => {
         icon: 'info',
         html:
           'Debes loguearte para poder descargar las miniaturas de forma automática.',
-        
+
         focusConfirm: false,
         confirmButtonText:
           '<i class="fa fa-thumbs-up"></i> Entendido',
@@ -46,16 +46,16 @@ const App = () => {
       });
       return;
     }
-  
+
     if (!ref.current) {
       console.error('El objeto ref es nulo');
       return;
     }
-    
+
     const images = Array.from(ref.current.childNodes);
 
     let index = 1;
-  
+
     try {
       for (const image of images) {
         const dataUrl = await toPng(image as HTMLElement);
@@ -64,10 +64,10 @@ const App = () => {
           const canvas = document.createElement("canvas");
           canvas.width = img.width;
           canvas.height = img.height;
-  
+
           const ctx = canvas.getContext("2d");
           ctx?.drawImage(img, 0, 0);
-  
+
           const newCanvas = document.createElement("canvas");
           if (index === 1) {
             newCanvas.width = 400;
@@ -91,7 +91,7 @@ const App = () => {
             newCanvas.width,
             newCanvas.height
           );
-  
+
           const newName = `file-${index}.png`;
           const newDataUrl = newCanvas.toDataURL("image/png");
           download(newDataUrl, newName);
@@ -117,7 +117,7 @@ const App = () => {
       })
     }
   };
-  
+
   const handleGetLinks = async () => {
 
     if (!isAuthenticated) {
@@ -126,7 +126,7 @@ const App = () => {
         icon: 'info',
         html:
           'Debes loguearte para poder obtener los enlaces de vista previa.',
-        
+
         focusConfirm: false,
         confirmButtonText:
           '<i class="fa fa-thumbs-up"></i> Entendido!',
@@ -138,7 +138,7 @@ const App = () => {
       return;
     }
     const images = Array.from(ref.current?.childNodes ?? []);
-  
+
     try {
       let links = await Promise.all(
         images.map(async (image, index) => {
@@ -153,9 +153,9 @@ const App = () => {
           return { name, url };
         })
       );
-  
+
       setDownloadedImages(links);
-  
+
       if (links.length === images.length) {
         const Toast = Swal.mixin({
           toast: true,
@@ -195,7 +195,7 @@ const App = () => {
   const handleClearImage = () => {
     setImage("");
     setDownloadedImages([]);
-  
+
     if (image) {
       const Toast = Swal.mixin({
         toast: true,
@@ -208,7 +208,7 @@ const App = () => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       Toast.fire({
         icon: 'success',
         title: 'Imagen borrada'
@@ -226,7 +226,7 @@ const App = () => {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       Toast.fire({
         icon: 'error',
         title: 'No hay imagen para limpiar'
@@ -244,7 +244,7 @@ const App = () => {
           icon: 'info',
           html:
             'Cuando haya una imagen o foto en el centro, haz click en <b>"Generar vistas previas"</b>, para que aparezcan las vistas previas.',
-          
+
           focusConfirm: false,
           confirmButtonText:
             '<i class="fa fa-thumbs-up"></i> Entendido!',
@@ -260,63 +260,63 @@ const App = () => {
   /* ------------------------------------------------------------------------------------------------------------------- */
   /* ------------------------------------------------------------------------------------------------------------------- */
   return (
-    <Container sx={{  maxWidth: 'none !important',border: 2, position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft:-8, marginRight:-10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
-    <Navbar checked={checked} onChange={handleChange}  />
+    <Container sx={{ maxWidth: 'none !important', border: 2, position: 'sticky', top: 0, left: 0, right: 0, bottom: 0, marginLeft: -8, marginRight: -10, width: '100vw', height: '120vh', display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
+      <Navbar checked={checked} onChange={handleChange} />
       <Grid container spacing={2} justifyContent="center" marginTop={10}  >
-      
-      <Collapse in={checked}>
-        <Grid item  xs={1} sm={2} md={6} lg={1} 
-          className="grid0"
-          minWidth={110}
-          minHeight={200}
-          borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" 
-          sx={{ backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop:{xs:"-136%", sm:"80%"} }}
+
+        <Collapse in={checked}>
+          <Grid item xs={1} sm={2} md={6} lg={1}
+            className="grid0"
+            minWidth={110}
+            minHeight={200}
+            borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)"
+            sx={{ backgroundColor: "#eceff1", border: 1, display: "flex", flexDirection: "column", flexWrap: "wrap", maxWidth: "10%", maxHeight: "220px", textAlign: "center", marginTop: { xs: "-136%", sm: "80%" } }}
           >
-            
-          <Typography variant="h6"  mb="15%"  fontSize={18} style={{ textDecoration: 'underline', marginLeft:"-1%"}}>
+
+            <Typography variant="h6" mb="15%" fontSize={18} style={{ textDecoration: 'underline', marginLeft: "-1%" }}>
               Vista previa
-          </Typography>
-              {downloadedImages.map(({ name, url }) => (
+            </Typography>
+            {downloadedImages.map(({ name, url }) => (
               <Box key={name} >
                 <Typography variant="h5" component="h1" mr="2" fontSize={16}>{name}</Typography>
                 <Link variant="h6" href={url} target="_blank" rel="noopener" fontSize={15} children="Ver" />
               </Box>
             ))}
-            
-        </Grid>
-        
+
+          </Grid>
+
         </Collapse>
 
-      <Grid item  className="grid1" xs={12} sm={5} md={6} lg={6} order={{xs: -1, sm:0, md:0, lg:0, xl:1 }}
-      sx={{ marginLeft:"auto"}}>
-        <Box textAlign="center" >
-          <Canvas
-            image={image}
-            size={size}
-            onDrop={onDrop}
-            onResize={(event, direction, { style }) => {
-              setSize({
-                width: parseInt(style.width),
-                height: parseInt(style.height),
-              });
-            }}
-            
-          />
-        </Box>
-      </Grid>
-      
-          <Grid item className="grid2" xs={12} sm={4} md={3} lg={2}  order={{xs: -1, sm:0, md:0, lg:0, xl:0 }}
-           sx={{  display: 'flex', justifyContent: {xs: 'center', sm: 'flex-end'}, marginLeft: { xs: 0, sm: 'auto' }, marginBottom:"50%"}}>
-            <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" sx={{backgroundColor: "#eceff1"}}>
-              <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
-              </Sidebar>
-            </Box>
-          </Grid>
-          
+        <Grid item className="grid1" xs={12} sm={5} md={6} lg={6} order={{ xs: -1, sm: 0, md: 0, lg: 0, xl: 1 }}
+          sx={{ marginLeft: "auto" }}>
+          <Box textAlign="center" >
+            <Canvas
+              image={image}
+              size={size}
+              onDrop={onDrop}
+              onResize={(event, direction, { style }) => {
+                setSize({
+                  width: parseInt(style.width),
+                  height: parseInt(style.height),
+                });
+              }}
+
+            />
+          </Box>
+        </Grid>
+
+        <Grid item className="grid2" xs={12} sm={4} md={3} lg={2} order={{ xs: -1, sm: 0, md: 0, lg: 0, xl: 0 }}
+          sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-end' }, marginLeft: { xs: 0, sm: 'auto' }, marginBottom: "50%" }}>
+          <Box textAlign="center" border={1} borderRadius="5px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.55)" sx={{ backgroundColor: "#eceff1" }}>
+            <Sidebar onDownload={handleDownload} onClear={handleClearImage} onLinks={handleGetLinks}>
+            </Sidebar>
+          </Box>
+        </Grid>
+
       </Grid>
       <Generator ref={ref} image={image} size={size} />
-      
-      
+
+
     </Container>
   );
 };

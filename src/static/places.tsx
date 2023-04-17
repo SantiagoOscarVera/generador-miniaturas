@@ -24,4 +24,3 @@ const places: Place[] = [
 
 export default places;
 
-  
